@@ -10,10 +10,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "org.flywaydb.flyway" version "4.1.2"
-}
-
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
@@ -34,17 +30,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-logging')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.flywaydb:flyway-core:4.1.2')
+    compile('org.liquibase:liquibase-core')
 
     runtime('org.postgresql:postgresql')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
-}
-
-flyway {
-    url = 'jdbc:postgresql://localhost:32222/brackets'
-    user = 'postgres'
-    password = 'sabha123'
 }
