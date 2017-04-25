@@ -12,8 +12,9 @@ You can check your DB connection with
 * Container powershell with `psql -h localhost -U postgres` -> `\l`. Should `brackets` db.
 * Can you a DB Tool like Valentina Studio
 
-## Run Flyway Migrations before `bootrun`
-* `gradle flywayMigrate -i`
-
 ## Run Boot
 * `gradle bootrun`
+* This step will run the Liquibase Schema Updates before starting the application.
+
+## Database Schema
+<img src="https://github.com/hack-sabha/bracket-services/blob/master/documents/schema.png" alt="Bracket Schema" width="60%" height="80%">

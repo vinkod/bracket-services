@@ -2,9 +2,13 @@
 *.iml
 .idea/
 
-#Gradle
+# Gradle
 .gradle/
 build/
 bin/
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
+
+# General
+.DS_Store
+
