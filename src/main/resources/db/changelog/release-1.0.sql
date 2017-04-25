@@ -1,9 +1,9 @@
 --liquibase formatted sql
 
---changeset Swaroop:ResultTypeReferenceTableGeneration(dbms:postgresql failOnError:true splitStatements:false)
-CREATE TABLE ref_result_type (
-  result_type_id BIGSERIAL PRIMARY KEY,
-  result_type TEXT NOT NULL
+--changeset Swaroop:MatchStatusReferenceTableGeneration(dbms:postgresql failOnError:true splitStatements:false)
+CREATE TABLE ref_match_status (
+  status_type_id BIGSERIAL PRIMARY KEY,
+  status TEXT NOT NULL
 );
 --rollback SELECT 1;
 
@@ -35,6 +35,7 @@ CREATE TABLE bracket_participants (
   participant_id BIGSERIAL PRIMARY KEY,
   bracket_id BIGINT REFERENCES brackets (bracket_id),
   participant_name TEXT NOT NULL,
+  team_id TEXT NOT NULL,
   seed INTEGER,
   UNIQUE (bracket_id, participant_id)
 );
@@ -45,11 +46,8 @@ CREATE TABLE bracket_matches (
   match_seq INT NOT NULL,
   participant_id1 BIGINT REFERENCES bracket_participants (participant_id),
   participant_id2 BIGINT REFERENCES bracket_participants (participant_id),
-  team_id1 BIGINT REFERENCES bracket_teams (team_id),
-  team_id2 BIGINT REFERENCES bracket_teams (team_id),
   round BIGINT REFERENCES ref_round (round_id),
-  result BIGINT REFERENCES ref_result_type (result_type_id),
-  score_id BIGINT DEFAULT 0,
+  winner_id BIGINT REFERENCES bracket_participants (participant_id),
   UNIQUE (bracket_id, match_id),
   UNIQUE (bracket_id, match_seq)
 );
