@@ -1,20 +1,25 @@
 package com.sabha.bracket.application;
 
-import com.sabha.bracket.entity.CityController;
+import com.sabha.bracket.entity.RoundController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * Entry point application to Bracket Services
+ * @author Swaroop Gaddameedhi.
+ */
 @SpringBootApplication
+@ComponentScan(basePackages = "com.sabha.bracket")
 public class BracketServicesApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(BracketServicesApplication.class, args);
     }
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
-    {
-        return application.sources(BracketServicesApplication.class, CityController.class);
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(BracketServicesApplication.class, RoundController.class);
     }
 }
