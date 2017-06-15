@@ -1,11 +1,12 @@
 package it;
 
-import com.google.common.collect.Maps;
-import com.tpark.tournament.application.TournamentServicesApplication;
-import com.tpark.tournament.dataaccess.RefSportRepository;
-import com.tpark.tournament.dataaccess.TournamentRepository;
-import com.tpark.tournament.entity.Sport;
-import com.tpark.tournament.entity.Tournament;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.util.Collection;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -18,12 +19,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collection;
-import java.util.Map;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import com.google.common.collect.Maps;
+import com.tpark.tournament.application.TournamentServicesApplication;
+import com.tpark.tournament.dataaccess.RefSportRepository;
+import com.tpark.tournament.dataaccess.TournamentRepository;
+import com.tpark.tournament.entity.RefTournamentType;
+import com.tpark.tournament.entity.Sport;
+import com.tpark.tournament.entity.Tournament;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TournamentServicesApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -76,10 +78,11 @@ public class TournamentITest {
         Sport sport = sports.iterator().next();
 
         // Creating a test Tournament object
-        Tournament tournament = new Tournament("TestTournament" + sportName, 1, sport, 1);
+        RefTournamentType type = new RefTournamentType("SingleElimination");
+        Tournament tournament = new Tournament("TestTournament" + sportName, type, sport, 1);
         tournamentRepository.save(tournament);
         System.out.println(tournament.toString());
-        //tournamentByIdMap.put(tournament.getTournamentId(), tournament);
+        // tournamentByIdMap.put(tournament.getTournamentId(), tournament);
     }
 
     public void deleteTournament(Collection<Long> tournamentIds) {

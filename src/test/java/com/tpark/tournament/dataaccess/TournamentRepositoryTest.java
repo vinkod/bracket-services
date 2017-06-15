@@ -12,10 +12,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.tpark.tournament.entity.RefTournamentType;
 import com.tpark.tournament.entity.Sport;
 import com.tpark.tournament.entity.Tournament;
 
@@ -35,8 +35,9 @@ public class TournamentRepositoryTest {
     @Ignore
     @Test
     public void testFindByName() {
+        RefTournamentType type = new RefTournamentType("SingleElimination");
         Sport expectedSport = new Sport("TestSport");
-        Tournament expectedTournament = new Tournament("TestTournament", 0, expectedSport, 0);
+        Tournament expectedTournament = new Tournament("TestTournament", type, expectedSport, 0);
         tournamentRepository.save(expectedTournament);
         assertThat(expectedTournament.getId(), notNullValue());
 

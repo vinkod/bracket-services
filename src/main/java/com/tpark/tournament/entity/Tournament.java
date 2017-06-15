@@ -21,7 +21,10 @@ public class Tournament implements Serializable {
     private long id;
 
     private String name;
-    private int type;
+
+    @ManyToOne
+    @JoinColumn(name = "type")
+    private RefTournamentType type;
 
     @ManyToOne
     @JoinColumn(name = "sport_id")
@@ -33,7 +36,7 @@ public class Tournament implements Serializable {
     Tournament() {
     }
 
-    public Tournament(String name, int type, Sport sport, int participantCount) {
+    public Tournament(String name, RefTournamentType type, Sport sport, int participantCount) {
         this.name = name;
         this.type = type;
         this.sport = sport;
@@ -48,7 +51,7 @@ public class Tournament implements Serializable {
         return name;
     }
 
-    public int getType() {
+    public RefTournamentType getType() {
         return type;
     }
 
