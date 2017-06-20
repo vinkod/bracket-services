@@ -1,5 +1,7 @@
 package com.tpark.tournament.util;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,8 +15,6 @@ public class BracketUtilTest {
 
     @Test
     public void testDetermineMatchesPerRoundInSinlgeElimination() {
-        Assert.assertEquals(ImmutableList.of(), util.determineMatchesPerRoundInSinlgeElimination(Long.MIN_VALUE));
-        Assert.assertEquals(ImmutableList.of(), util.determineMatchesPerRoundInSinlgeElimination(-1));
         Assert.assertEquals(ImmutableList.of(), util.determineMatchesPerRoundInSinlgeElimination(0));
         Assert.assertEquals(ImmutableList.of(), util.determineMatchesPerRoundInSinlgeElimination(1));
         Assert.assertEquals(ImmutableList.of(1L), util.determineMatchesPerRoundInSinlgeElimination(2));
@@ -54,9 +54,15 @@ public class BracketUtilTest {
         Assert.assertEquals(ImmutableList.of(32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(64));
         Assert.assertEquals(ImmutableList.of(36L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(100));
         Assert.assertEquals(ImmutableList.of(64L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(128));
+        Assert.assertEquals(ImmutableList.of(32L, 64L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(160));
         Assert.assertEquals(ImmutableList.of(2L, 64L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(130));
         Assert.assertEquals(ImmutableList.of(512L, 256L, 128L, 64L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(1024));
         Assert.assertEquals(ImmutableList.of(1L, 512L, 256L, 128L, 64L, 32L, 16L, 8L, 4L, 2L, 1L), util.determineMatchesPerRoundInSinlgeElimination(1025));
+    }
+
+    @Test
+    public void testSetupMatchesPerRoundSingleElimination() {
+        List<BracketUtil.MactchUp> mactchUpList = util.setupMatchesPerRoundSingleElimination(16L, ImmutableList.of(8L, 4L, 2L, 1L));
 
     }
 
